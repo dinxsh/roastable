@@ -27,6 +27,16 @@ export async function POST(req: NextRequest) {
     const text = data.choices?.[0]?.message?.content?.trim() || '';
     return NextResponse.json({ text });
   } catch (err) {
-    return NextResponse.json({ error: 'Failed to generate card text.' }, { status: 500 });
+    // Enhanced error logging
+    console.error('Error in /api/generate-card:', err);
+    let errorMessage = 'Failed to generate card text.';
+    let stack = '';
+    if (err instanceof Error) {
+      errorMessage = err.message;
+      stack = err.stack || '';
+    } else if (typeof err === 'string') {
+      errorMessage = err;
+    }
+    return NextResponse.json({ error: errorMessage, stack }, { status: 500 });
   }
 } 
