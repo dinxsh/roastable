@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --background: #101010;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Space Grotesk', 'Satoshi', Arial, Helvetica, sans-serif;
+}
+
+.card-vaporwave {
+  @apply bg-gradient-to-br from-primary via-secondary to-accent text-background rounded-2xl shadow-card p-6 font-sans text-lg font-bold tracking-tight;
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 32px 0 rgba(90,0,224,0.15), 0 1.5px 8px 0 #FF2D55;
+}
+
+@keyframes border-glow {
+  0%, 100% {
+    box-shadow: 0 0 16px 4px #5A00E0, 0 0 8px 2px #FF2D55, 0 0 0 0 #FCE83A;
+  }
+  50% {
+    box-shadow: 0 0 32px 8px #FCE83A, 0 0 16px 4px #FF2D55, 0 0 8px 2px #5A00E0;
+  }
+}
+.animate-border-glow {
+  animation: border-glow 2.5s infinite alternate;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+.animate-pulse-border {
+  animation: pulse-border 2.5s infinite alternate;
+}
+
+.card-y2k {
+  @apply bg-gradient-to-tr from-accent via-primary to-secondary text-background rounded-3xl shadow-card p-7 font-sans text-xl font-extrabold tracking-wider border-4 border-secondary relative overflow-hidden;
+  box-shadow: 0 8px 40px 0 #FF2D55, 0 2px 12px 0 #5A00E0;
+}
+
+.card-y2k::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, #FCE83A33 0 10px, transparent 10px 20px);
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 1.5rem;
+  animation: y2k-bg 3s linear infinite;
+}
+
+@keyframes y2k-bg {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
